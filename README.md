@@ -19,7 +19,7 @@ The Set2 API supports both `set2.forEach` and the new `for (var e of set) { ...
 
 This library depends on the javascript `Map` and `Set` class, so its avaliable
 in NodeJS 0.12, IoJS and any [modern
-browser](https://kangax.github.io/compat-table/es6/#Map). Any polyfill that
+browser](https://kangax.github.io/compat-table/es6/#Set). Any polyfill that
 adds Map and Set to the global object should work fine too.
 
 I made Set2 alongside [Map2](http://github.com/josephg/map2). You might find
@@ -190,7 +190,7 @@ set.forEach(function(value, key1, key2) {
 #### set.values()
 
 Get an iterator for the entries in the set. Each entry in the result is an
-array of [key1, key2, value]. Map.entries is also exposed via
+array of [key1, key2, value]. Set.entries is also exposed via
 `set[Symbol.iterator]` for usage in for..of loops.
 
 ```javascript
