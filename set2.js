@@ -81,12 +81,18 @@ Set2.prototype.forEach = function(fn) {
   });
 };
 
-// Iterator to support for..of loops
-Set2.prototype[Symbol.iterator] = Set2.prototype.entries = function() {
-  var outer = this.map.entries();
+// Iterator to support for..of loops. Its kind of weird that we register the
+// same method under 3 different names, but both Map and Set have a .entries()
+// method which lets you iterate over pairs of [k,v] or [v,v] in the case of
+// set. 
+//
+// So I'll make the API more or less compatible - but in reality, you probably
+// want .values() or to use for..of (which uses [Symbol.iterator]).
+Set2.prototype[Symbol.iterator] = Set2.prototype.values = Set2.prototype.entries = function() {
+  var outer = this.map.entries(); // Iterator over outer map
 
   var v1;
-  var inner = null;
+  var inner = null; // Iterator over inner set
 
   var iterator = {
     next: function() {
@@ -98,7 +104,7 @@ Set2.prototype[Symbol.iterator] = Set2.prototype.entries = function() {
         if (outerV.done) return outerV;
 
         v1 = outerV.value[0];
-        inner = outerV.value[1].entries();
+        inner = outerV.value[1].values();
       }
 
       // Ok, innerV should now contain [k2, v].
@@ -109,7 +115,7 @@ Set2.prototype[Symbol.iterator] = Set2.prototype.entries = function() {
     }
   };
 
-  iterator[Symbol.iterator] = iterator.next;
+  iterator[Symbol.iterator] = function() { return iterator; };
   return iterator;
 };
 
