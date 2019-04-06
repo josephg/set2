@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Set of (a, b) pairs based off ES6 Sets",
   "main": "set2.js",
+  "types": "set2.d.js",
   "scripts": {
     "test": "mocha --compilers coffee:coffee-script/register --reporter spec test.coffee"
   },
@@ -18,6 +19,7 @@
   "bugs": {
     "url": "https://github.com/josephg/set2/issues"
   },
+  "files": ["set2.d.ts"],
   "homepage": "https://github.com/josephg/set2",
   "devDependencies": {
     "coffee-script": "^1.9.2",
